@@ -1,0 +1,43 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+
+      <h2>LoginForm </h2>
+      <form #LoginForm="ngForm" (ngSubmit)="handleSubmitForm(LoginForm)">
+        <div class="mb-3">
+          <label for="Email" class="form-label">Email</label>
+          <input type="text" class="form-control" id="Email" aria-describedby="emailhelper" name="email"
+            [(ngModel)]="formValues.email" #email="ngModel" required
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" />
+
+          @if(email.invalid && email.touched&&submitted){
+          <div id="emailhelper" class="form-text text-danger">
+            @if (email.hasError('required')) {
+            <span>Required</span>
+            } @else if(email.hasError('pattern')){
+            <span>invaild email</span>
+            }
+          </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" aria-describedby="passwordhelper" name="password"
+            [(ngModel)]="formValues.password" #password="ngModel" required minlength="8"/>
+
+          @if(password.invalid && password.touched){
+          <div id="passwordhelper" class="form-text text-danger">
+            @if (password.hasError('required')) {
+            <span>Required</span>
+            }
+          </div>
+          }
+        </div>
+        <button type="submit" class="btn btn-primary">login</button>
+      </form>
+
+      <p>Don’t have an account? <a routerLink="/register">Register</a></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+
+<!--<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+
+
+      <button class="btn btn-danger px-4" (click)="decrese()" >-1</button>
+      <span class="mx-4 text-bold">{{countervalue}}</span>
+      <button class="btn btn-success px-4" (click)="increse()">+</button>
+    </div>
+  </div>
+-->
+<table class="table align-middle text-center">
+  <thead class="table-light">
+    <tr>
+      <th scope="col">Description</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Remove</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of cartItems; track item.productId) {
+      <tr>
+        <td class="d-flex align-items-center">
+          <img [src]="item.images" alt="{{item.productName}}" class="img-thumbnail me-3" style="width: 80px; height: 80px; object-fit: contain;">
+          <div>
+            <strong>{{ item.productName }}</strong><br>
+            <small class="text-muted">Product Code: {{ item.productId }}</small>
+          </div>
+        </td>
+        <td>
+          <button 
+          class="btn btn-success btn-sm me-2" 
+          (click)="increaseQuantity(item)" 
+          [disabled]="item.quantity >= getStock(item.productId)">
+          +
+        </button>
+        <span>{{ item.quantity }}</span>
+        <button class="btn btn-secondary btn-sm ms-2" (click)="decreaseQuantity(item)">-</button>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="removeItem(item.productId)">
+            &times;
+          </button>
+        </td>
+        <td><strong>{{ item.price | price}}</strong></td>
+      </tr>
+    }
+  </tbody>
+</table>
+<div class="d-flex justify-content-end mt-4">
+  <div class="border p-3" style="width: 250px;">
+    <div class="d-flex justify-content-between">
+      <strong>Total</strong>
+      <strong>{{ getTotal() | price }}</strong>
+    </div>
+  </div>
+</div>

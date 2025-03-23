@@ -1,0 +1,24 @@
+<div class="card shadow p-3 mb-5 bg-body rounded">
+    <div>
+        @if(carditem.stock==0){
+            <span class="badge bg-danger">outOfStock</span>
+         }
+         @else if(carditem.stock>0){
+            <span class="badge bg-success">inStock</span>
+         }
+    </div>
+    <img [src]="carditem.images" class="card-img-top" alt=>
+    <div class="card-body">
+
+      <a class="card-title fw-bold" [routerLink]="['/product-details',carditem.id]">{{carditem.title|uppercase}}</a>
+      <p class="card-text">{{carditem.description}}</p>
+      <span class="fw-bold">{{carditem.price|price}}</span>
+    </div>
+   
+    <div>
+        <button class="rounded btn btn-success mx-3"(click)="addToCart()">Add to cart</button>
+
+        <!--<button class="rounded btn btn-danger" (click)="handeledelete()">Delete</button>-->
+        <button class="rounded btn btn-success" (click)="handelRedirectTodetails()">details</button>
+    </div>
+  </div>

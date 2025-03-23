@@ -1,0 +1,45 @@
+<div class="container">
+
+    <div class="card mb-3 p-3 shadow-lg p-3 mb-5 bg-body rounded " style="max-width: 800px;">
+        <div class="row g-0">
+          <div class="col-md-6">
+            <img [src]="productDetails.images" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h4 class="card-title mt-3 pt-3">{{productDetails.title}}</h4>
+              <div>
+                @if(productDetails.stock==0){
+                    <span class="badge bg-danger">outOfStock</span>
+                 }
+                 @else if(productDetails.stock>0){
+                    <span class="badge bg-success">inStock</span>
+                 }
+            </div>
+              <p class="card-text my-3">{{productDetails.description}}</p>
+              <span class="fw-bold">{{productDetails.price|price}}</span> after
+              <span class="fw-bold">{{productDetails.price|discount:productDetails.discountPercentage}}</span>
+              <div>
+                
+                @for (item of productDetails.reviews; track $index) {
+                  <i class="fas fa-star" style="color: green;"></i>
+                }
+              </div>
+              <div>
+                              
+                  <button 
+                  class="btn btn-primary"
+                  (click)="addToCart()"
+                  [disabled]="isStockLimitReached()">
+                  Add to Cart
+                  </button>
+                  @if (isStockLimitReached()) {
+                    <div class="invalid-feedback d-block text-danger">
+                      Can't add more!
+                    </div>}
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

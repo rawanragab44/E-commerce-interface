@@ -1,0 +1,99 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2 class="text-center mb-4">Register</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+                   <!-- Name -->
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input id="name" formControlName="name" type="text" class="form-control"
+              [ngClass]="{ 'is-invalid': registerForm.get('name')?.invalid && registerForm.get('name')?.touched }">
+            @if (registerForm.get('name')?.errors?.['required'] && registerForm.get('name')?.touched) {
+              <div class="invalid-feedback">
+                Name is required.
+              </div>
+            }
+          </div>
+  
+          <!-- Username -->
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input id="username" formControlName="username" type="text" class="form-control"
+              [ngClass]="{ 'is-invalid': registerForm.get('username')?.invalid && registerForm.get('username')?.touched }">
+            @if (registerForm.get('username')?.errors?.['required'] && registerForm.get('username')?.touched) {
+              <div class="invalid-feedback">
+                Username is required.
+              </div>
+            }
+            @if (registerForm.get('username')?.errors?.['pattern'] && registerForm.get('username')?.touched) {
+              <div class="invalid-feedback">
+                Username cannot contain spaces.
+              </div>
+            }
+          </div>
+          <!-- Email -->
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input id="email" formControlName="email" type="email" class="form-control"
+              [ngClass]="{ 'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched }">
+            @if (registerForm.get('email')?.errors?.['required'] && registerForm.get('email')?.touched) {
+              <div class="invalid-feedback">
+                Email is required.
+              </div>
+            }
+            @if (registerForm.get('email')?.errors?.['email'] && registerForm.get('email')?.touched) {
+              <div class="invalid-feedback">
+                Invalid email format.
+              </div>
+            }
+          </div>
+  
+   
+  
+
+             <!-- Password -->
+         <!-- Password -->
+         <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input id="password" formControlName="password" type="password" class="form-control"
+              [ngClass]="{ 'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched }">
+            @if (registerForm.get('password')?.errors?.['required'] && registerForm.get('password')?.touched) {
+              <div class="invalid-feedback">
+                Password is required.
+              </div>
+            }
+            @if (registerForm.get('password')?.errors?.['pattern'] && registerForm.get('password')?.touched) {
+              <div class="invalid-feedback">
+                Password must be 8-20 characters long, contain at least one uppercase letter, one lowercase letter, one
+                digit, and one special character (*%$#).
+              </div>
+            }
+          </div>
+  
+          <!-- Confirm Password -->
+          <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input id="confirmPassword" formControlName="confirmPassword" type="password" class="form-control"
+              [ngClass]="{ 'is-invalid': (registerForm.get('confirmPassword')?.invalid || registerForm.errors?.['passwordMismatch']) && registerForm.get('confirmPassword')?.touched }">
+            @if (registerForm.get('confirmPassword')?.errors?.['required'] && registerForm.get('confirmPassword')?.touched) {
+              <div class="invalid-feedback">
+                Confirm Password is required.
+              </div>
+            }
+            @if (registerForm.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.touched) {
+              <div class="invalid-feedback">
+                Passwords do not match.
+              </div>
+            }
+          </div>
+  
+          <!-- Submit Button -->
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <p class="text-center"> Already have account! <a  routerLink="/login">login</a></p>
